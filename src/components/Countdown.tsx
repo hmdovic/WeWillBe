@@ -14,21 +14,21 @@ function pad(n: number) {
 function CountdownUnit({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative h-[3.4rem] w-[3.6rem] overflow-hidden md:h-[7rem] md:w-[7.5rem] lg:h-[8.5rem] lg:w-[9rem]">
+      <div className="relative h-[4.6rem] w-[3.4rem] overflow-hidden sm:h-[5.6rem] sm:w-[4.2rem] md:h-[7.5rem] md:w-[7.5rem] lg:h-[9rem] lg:w-[9rem]">
         <AnimatePresence mode="popLayout">
           <motion.span
             key={value}
-            className="absolute inset-0 flex items-center justify-center font-sans text-[2.6rem] font-black tabular-nums leading-none text-paper md:text-[5.2rem] lg:text-[6.4rem]"
-            initial={{ opacity: 0, y: 18 }}
+            className="absolute inset-0 flex items-center justify-center font-sans text-[3.4rem] font-black tabular-nums leading-none text-paper [text-shadow:0_0_40px_rgba(137,50,36,0.55)] sm:text-[4.2rem] md:text-[5.6rem] lg:text-[6.8rem]"
+            initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
+            exit={{ opacity: 0, y: -22 }}
             transition={{ duration: 0.5, ease: EASE_LUXURY }}
           >
             {value}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="mt-3 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-paper/45 md:text-xs">
+      <span className="mt-2 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-paper/45 sm:mt-3 sm:text-[0.68rem] md:text-xs">
         {label}
       </span>
     </div>
@@ -41,21 +41,28 @@ export default function Countdown() {
   return (
     <section className="relative overflow-hidden bg-charcoal py-24 md:py-36" aria-label="Pre-order countdown">
       <div className="grain" />
+      {/* A dramatic glow behind the numbers instead of flat charcoal — the
+          countdown is the one thing on this page meant to feel urgent. */}
+      <div
+        className="absolute left-1/2 top-1/2 -z-0 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60"
+        style={{ background: "radial-gradient(circle, rgba(137,50,36,0.35) 0%, rgba(137,50,36,0) 70%)" }}
+        aria-hidden="true"
+      />
       <div className="relative mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
         <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+          <span className="text-xs font-semibold uppercase tracking-[0.32em] text-accent sm:text-sm">
             {isOver ? "Pre-Orders Have Closed" : "Pre-Order Ends In"}
           </span>
         </Reveal>
 
         {!isOver ? (
-          <Reveal delay={0.1} className="mt-8 flex items-center gap-3 md:mt-12 md:gap-6 lg:gap-9">
+          <Reveal delay={0.1} className="mt-10 flex items-center gap-1.5 sm:gap-4 md:mt-12 md:gap-6 lg:gap-9">
             <CountdownUnit value={pad(days)} label="Days" />
-            <span className="mb-6 font-sans text-2xl font-light text-paper/20 md:mb-10 md:text-4xl">:</span>
+            <span className="mb-7 font-sans text-xl font-light text-paper/20 sm:mb-8 sm:text-3xl md:mb-10 md:text-4xl">:</span>
             <CountdownUnit value={pad(hours)} label="Hrs" />
-            <span className="mb-6 font-sans text-2xl font-light text-paper/20 md:mb-10 md:text-4xl">:</span>
+            <span className="mb-7 font-sans text-xl font-light text-paper/20 sm:mb-8 sm:text-3xl md:mb-10 md:text-4xl">:</span>
             <CountdownUnit value={pad(minutes)} label="Min" />
-            <span className="mb-6 font-sans text-2xl font-light text-paper/20 md:mb-10 md:text-4xl">:</span>
+            <span className="mb-7 font-sans text-xl font-light text-paper/20 sm:mb-8 sm:text-3xl md:mb-10 md:text-4xl">:</span>
             <CountdownUnit value={pad(seconds)} label="Sec" />
           </Reveal>
         ) : (

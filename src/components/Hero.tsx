@@ -112,7 +112,14 @@ export default function Hero() {
         onMouseLeave={handleMouseLeave}
       >
         <div className="absolute -inset-5 -z-20">
-          <div className="absolute inset-0">
+          {/* A still photo has none of a video's built-in motion, so a
+              slow, near-imperceptible ambient zoom stands in for it —
+              the background is never quite sitting dead still. */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.07] }}
+            transition={{ duration: 22, repeat: Infinity, repeatType: "mirror", ease: "linear" }}
+          >
             <Image
               src="/images/hero-couple-walking-mobile.jpg"
               alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
@@ -123,7 +130,7 @@ export default function Hero() {
               style={{ objectPosition: "center 22%" }}
               sizes="100vw"
             />
-          </div>
+          </motion.div>
         </div>
 
         <div
@@ -218,16 +225,25 @@ export default function Hero() {
         <div className="relative w-[56%] overflow-hidden bg-ink" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <motion.div className="absolute -inset-5" style={{ y: bgY }}>
             <div ref={bgRef} className="absolute inset-0 transition-transform duration-500" style={{ transitionTimingFunction: "var(--ease-luxury)" }}>
-              <Image
-                src="/images/hero-couple-walking.jpg"
-                alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
-                fill
-                priority
-                fetchPriority="high"
-                className="object-cover"
-                style={{ objectPosition: "center 12%" }}
-                sizes="56vw"
-              />
+              {/* Ambient zoom, same reasoning as the mobile panel — a
+                  separate nested layer so it never fights the mouse-
+                  parallax transform set imperatively on the parent. */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ scale: [1, 1.06] }}
+                transition={{ duration: 24, repeat: Infinity, repeatType: "mirror", ease: "linear" }}
+              >
+                <Image
+                  src="/images/hero-couple-walking.jpg"
+                  alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
+                  fill
+                  priority
+                  fetchPriority="high"
+                  className="object-cover"
+                  style={{ objectPosition: "center 12%" }}
+                  sizes="56vw"
+                />
+              </motion.div>
             </div>
           </motion.div>
           {/* Feather the inner edge into the ink panel — a seamless join

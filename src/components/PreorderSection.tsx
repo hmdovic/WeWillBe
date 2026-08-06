@@ -26,8 +26,18 @@ export default function PreorderSection() {
           <source src="/video/hero-couple.mp4" type="video/mp4" />
         </video>
       </div>
+      {/* Darker on mobile specifically — the smaller crop of the same
+          footage shows more midtone brick/skin, less naturally-dark sky,
+          so it needs a heavier scrim to keep the CTA unmistakably legible. */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 md:hidden"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(19,17,16,0.96) 0%, rgba(19,17,16,0.72) 55%, rgba(19,17,16,0.85) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 -z-10 hidden md:block"
         style={{
           background:
             "linear-gradient(to top, rgba(19,17,16,0.9) 0%, rgba(19,17,16,0.55) 55%, rgba(19,17,16,0.7) 100%)",

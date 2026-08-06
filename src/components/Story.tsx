@@ -30,13 +30,13 @@ export default function Story() {
               </motion.div>
             </div>
           </div>
-          <div className="absolute -bottom-8 -right-6 h-32 w-24 overflow-hidden ring-4 ring-paper sm:h-44 sm:w-32 md:-right-10">
+          <div className="absolute -bottom-6 -right-4 h-36 w-28 overflow-hidden shadow-[0_12px_30px_-8px_rgba(0,0,0,0.5)] ring-4 ring-paper sm:h-48 sm:w-36 md:-bottom-8 md:-right-10">
             <Image
               src="/images/tee-lifestyle-01.jpg"
               alt="A WEWILLBE Legend, back turned, in the LEGENDS tee"
               fill
               className="object-cover"
-              sizes="140px"
+              sizes="160px"
             />
           </div>
         </Reveal>
