@@ -33,6 +33,8 @@ export default function ProductCard({ product, index }: { product: Product; inde
   return (
     <Reveal delay={index * 0.08} className="group">
       <div className="relative aspect-[4/5] overflow-hidden bg-paper">
+        {/* Lead with the back print — that's where the branding lives, and
+            it's the more interesting shot. Front (plain) reveals on hover. */}
         <motion.div
           className="absolute inset-0"
           initial={{ opacity: 1 }}
@@ -40,8 +42,8 @@ export default function ProductCard({ product, index }: { product: Product; inde
           transition={{ duration: 0.5, ease: EASE_LUXURY }}
         >
           <Image
-            src={product.frontImage}
-            alt={`${product.name} — front`}
+            src={product.backImage}
+            alt={`${product.name} — back, wewillbe LEGENDS print`}
             fill
             className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -54,8 +56,8 @@ export default function ProductCard({ product, index }: { product: Product; inde
           transition={{ duration: 0.5, ease: EASE_LUXURY }}
         >
           <Image
-            src={product.backImage}
-            alt={`${product.name} — back, wewillbe LEGENDS print`}
+            src={product.frontImage}
+            alt={`${product.name} — front`}
             fill
             className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
             sizes="(max-width: 768px) 100vw, 50vw"

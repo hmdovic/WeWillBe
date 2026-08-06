@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BRAND } from "@/lib/constants";
 import { usePreorder } from "./PreorderContext";
@@ -38,26 +39,48 @@ export default function Hero() {
       onMouseLeave={handleMouseLeave}
     >
       <div ref={bgRef} className="absolute -inset-5 -z-20 transition-transform duration-500" style={{ transitionTimingFunction: "var(--ease-luxury)" }}>
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 30%" }}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/video/hero-couple-poster.jpg"
-        >
-          <source src="/video/hero-couple-mobile.mp4" media="(max-width: 860px)" type="video/mp4" />
-          <source src="/video/hero-couple.mp4" type="video/mp4" />
-        </video>
+        {/* Art-directed still: the couple, back turned, in the real LEGENDS
+            tee + hoodie. Two crops so the pair stays framed on both a tall
+            phone screen and a wide desktop hero — not the same file
+            stretched, an actual different crop per breakpoint. */}
+        <Image
+          src="/images/hero-couple-walking-mobile.jpg"
+          alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
+          fill
+          priority
+          fetchPriority="high"
+          className="object-cover md:hidden"
+          style={{ objectPosition: "center 22%" }}
+          sizes="100vw"
+        />
+        <Image
+          src="/images/hero-couple-walking.jpg"
+          alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
+          fill
+          priority
+          fetchPriority="high"
+          className="hidden object-cover md:block"
+          style={{ objectPosition: "center 20%" }}
+          sizes="100vw"
+        />
       </div>
 
-      {/* Scrim: darker at the bottom where the overlay text sits */}
+      {/* Scrim: darker at the bottom where the overlay text + CTAs sit */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(to top, rgba(19,17,16,0.92) 0%, rgba(19,17,16,0.25) 42%, rgba(19,17,16,0.55) 100%)",
+            "linear-gradient(to top, rgba(19,17,16,0.95) 0%, rgba(19,17,16,0.35) 38%, rgba(19,17,16,0.15) 60%, rgba(19,17,16,0.5) 100%)",
+        }}
+      />
+      {/* Extra vignette centered on the text/CTA column — guarantees the
+          "Pre-Order Now" button and its copy stay legible no matter what's
+          behind them in the photo (a light tee, a bright wall, etc.). */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 78%, rgba(19,17,16,0.55) 0%, rgba(19,17,16,0) 100%)",
         }}
       />
       <div className="grain -z-10" />
@@ -111,9 +134,15 @@ export default function Hero() {
         >
           <MagneticButton
             onClick={() => open()}
-            className="rounded-none bg-paper px-8 py-4 text-xs font-bold uppercase tracking-[0.14em] text-ink hover:bg-white"
+            className="group rounded-none bg-paper px-10 py-[1.15rem] text-sm font-bold uppercase tracking-[0.14em] text-ink shadow-[0_18px_40px_-12px_rgba(0,0,0,0.55)] hover:bg-white"
           >
-            Pre-Order Now
+            <span className="inline-flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              Pre-Order Now
+            </span>
           </MagneticButton>
           <MagneticButton
             onClick={scrollToProducts}
@@ -122,6 +151,15 @@ export default function Hero() {
             Explore Collection
           </MagneticButton>
         </motion.div>
+
+        <motion.p
+          className="mt-5 text-[0.68rem] uppercase tracking-[0.12em] text-paper/55"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 1.35, ease: EASE_LUXURY }}
+        >
+          Pre-Orders Close Saturday · Ships This Sunday
+        </motion.p>
       </div>
 
       <motion.div
