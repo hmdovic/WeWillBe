@@ -7,21 +7,24 @@ export default function Purpose() {
       <div className="grain" />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <Reveal className="flex flex-col items-center">
-          {/* A warm, human detail instead of any charity-logo or crisis
-              imagery — two hands held, cropped from the campaign shoot.
-              Real photo, not stock, not a symbol standing in for a place. */}
+          {/* An explicit statement, by request — not the subtle non-flag
+              nod this section used before. Owner confirmed this reversal
+              knowingly, aware it also reverses the "no flags" line in the
+              original brief. */}
           <div className="relative mb-9 h-32 w-32 overflow-hidden rounded-full ring-1 ring-paper/15 md:h-40 md:w-40">
             <Image
-              src="/images/hands-held.jpg"
-              alt="Two hands held together"
+              src="/images/palestine-heart.jpg"
+              alt="A heart in the colors of the Palestinian flag"
               fill
               className="object-cover"
               sizes="160px"
             />
           </div>
 
-          {/* A quiet, non-flag nod — four low-saturation tones, a hairline
-              rule, nothing that reads as iconography or a symbol on its own. */}
+          <span className="mb-4 block font-sans text-lg font-black uppercase tracking-[-0.01em] text-paper md:text-2xl">
+            We Support Palestine.
+          </span>
+
           <span
             className="mx-auto mb-8 block h-[2px] w-16"
             style={{
@@ -45,13 +48,15 @@ export default function Purpose() {
         <Reveal delay={0.2} className="mt-10">
           <p className="text-sm leading-relaxed text-paper/55 md:text-base">
             Hope doesn&rsquo;t need permission. Neither does compassion. This is our own
-            commitment, not a cause we&rsquo;re borrowing for a campaign.
+            position, and our own commitment — not a cause we&rsquo;re borrowing for a
+            campaign.
           </p>
         </Reveal>
 
         <Reveal delay={0.3} className="mt-12">
           <p className="mx-auto max-w-xl text-xs leading-relaxed text-paper/35">
-            This is WEWILLBE&rsquo;s own donation commitment. It does not imply an official
+            The statement above is WEWILLBE&rsquo;s own. The donation is WEWILLBE&rsquo;s own
+            commitment, made to Save the Children directly — it does not imply an official
             partnership with Save the Children unless and until one is confirmed. We&rsquo;ll
             share proof of each transfer as pre-orders come in.
           </p>
