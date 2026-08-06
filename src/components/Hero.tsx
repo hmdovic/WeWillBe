@@ -2,16 +2,26 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { BRAND } from "@/lib/constants";
 import { usePreorder } from "./PreorderContext";
 import MagneticButton from "./MagneticButton";
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const HEADLINE_LETTERS = BRAND.name.split("");
 
 export default function Hero() {
   const { open } = usePreorder();
   const bgRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Scroll-linked parallax: as the hero scrolls out of view, the copy
+  // fades and lifts a little faster than the background — a bit of
+  // depth instead of the whole section moving as one flat plane.
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
   function handleMouseMove(e: React.MouseEvent) {
     const el = bgRef.current;
@@ -34,36 +44,42 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-[100svh] w-full overflow-hidden flex flex-col items-center justify-end pb-14 md:pb-20"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div ref={bgRef} className="absolute -inset-5 -z-20 transition-transform duration-500" style={{ transitionTimingFunction: "var(--ease-luxury)" }}>
-        {/* Art-directed still: the couple, back turned, in the real LEGENDS
-            tee + hoodie. Two crops so the pair stays framed on both a tall
-            phone screen and a wide desktop hero — not the same file
-            stretched, an actual different crop per breakpoint. */}
-        <Image
-          src="/images/hero-couple-walking-mobile.jpg"
-          alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
-          fill
-          priority
-          fetchPriority="high"
-          className="object-cover md:hidden"
-          style={{ objectPosition: "center 22%" }}
-          sizes="100vw"
-        />
-        <Image
-          src="/images/hero-couple-walking.jpg"
-          alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
-          fill
-          priority
-          fetchPriority="high"
-          className="hidden object-cover md:block"
-          style={{ objectPosition: "center 20%" }}
-          sizes="100vw"
-        />
-      </div>
+      {/* Outer layer: slow scroll-linked drift (depth). Inner layer: fast
+          mouse parallax (imperative, via bgRef). Two independent transforms
+          on two nested elements so they never fight over the same style. */}
+      <motion.div className="absolute -inset-5 -z-20" style={{ y: bgY }}>
+        <div ref={bgRef} className="absolute inset-0 transition-transform duration-500" style={{ transitionTimingFunction: "var(--ease-luxury)" }}>
+          {/* Art-directed still: the couple, back turned, in the real
+              LEGENDS tee + hoodie. Two crops so the pair stays framed on
+              both a tall phone screen and a wide desktop hero — not the
+              same file stretched, an actual different crop per breakpoint. */}
+          <Image
+            src="/images/hero-couple-walking-mobile.jpg"
+            alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
+            fill
+            priority
+            fetchPriority="high"
+            className="object-cover md:hidden"
+            style={{ objectPosition: "center 22%" }}
+            sizes="100vw"
+          />
+          <Image
+            src="/images/hero-couple-walking.jpg"
+            alt="A couple walking hand in hand, back turned, wearing the WEWILLBE LEGENDS hoodie and tee"
+            fill
+            priority
+            fetchPriority="high"
+            className="hidden object-cover md:block"
+            style={{ objectPosition: "center 20%" }}
+            sizes="100vw"
+          />
+        </div>
+      </motion.div>
 
       {/* Scrim: darker at the bottom where the overlay text + CTAs sit */}
       <div
@@ -96,7 +112,10 @@ export default function Hero() {
         </span>
       </motion.div>
 
-      <div className="relative z-10 flex flex-col items-center px-6 text-center max-w-4xl">
+      <motion.div
+        className="relative z-10 flex flex-col items-center px-6 text-center max-w-4xl"
+        style={{ opacity: contentOpacity, y: contentY }}
+      >
         <motion.span
           className="mb-4 text-[0.7rem] md:text-xs font-semibold uppercase tracking-[0.28em] text-paper/70"
           initial={{ opacity: 0 }}
@@ -106,15 +125,19 @@ export default function Hero() {
           {BRAND.collection}
         </motion.span>
 
-        <h1 className="overflow-hidden">
-          <motion.span
-            className="block font-sans font-black uppercase leading-[0.88] tracking-[-0.02em] text-paper text-[3.4rem] md:text-[7rem] lg:text-[9rem]"
-            initial={{ y: "110%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 1.1, delay: 0.55, ease: EASE_LUXURY }}
-          >
-            {BRAND.name}
-          </motion.span>
+        <h1 className="flex" aria-label={BRAND.name}>
+          {HEADLINE_LETTERS.map((letter, i) => (
+            <span key={i} className="inline-block overflow-hidden" aria-hidden="true">
+              <motion.span
+                className="font-headline block font-extrabold uppercase leading-[0.9] tracking-[-0.01em] text-paper text-[2.5rem] md:text-[4.6rem] lg:text-[6.2rem]"
+                initial={{ y: "115%" }}
+                animate={{ y: "0%" }}
+                transition={{ duration: 0.9, delay: 0.5 + i * 0.045, ease: EASE_LUXURY }}
+              >
+                {letter}
+              </motion.span>
+            </span>
+          ))}
         </h1>
 
         <motion.p
@@ -160,7 +183,7 @@ export default function Hero() {
         >
           Pre-Orders Close Saturday · Ships This Sunday
         </motion.p>
-      </div>
+      </motion.div>
 
       <motion.div
         className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-10 flex flex-col items-center gap-3"

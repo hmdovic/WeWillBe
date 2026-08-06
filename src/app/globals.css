@@ -25,6 +25,7 @@
 
   --font-sans: var(--font-archivo);
   --font-serif: var(--font-fraunces);
+  --font-headline: var(--font-display);
 
   --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
 }
