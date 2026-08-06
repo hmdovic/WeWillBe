@@ -1,23 +1,39 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
 
+// Heart clip-path, defined once in objectBoundingBox units so it scales
+// to whatever size the image box actually is (128px on mobile, 160px on
+// desktop) instead of a fixed-pixel path that would only fit one size.
+const HEART_CLIP_PATH_ID = "purpose-heart-clip";
+
 export default function Purpose() {
   return (
     <section className="relative overflow-hidden bg-ink py-24 md:py-32">
       <div className="grain" />
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <defs>
+          <clipPath id={HEART_CLIP_PATH_ID} clipPathUnits="objectBoundingBox">
+            <path d="M0.5,0.96 C0.5,0.96 0.04,0.62 0.04,0.32 C0.04,0.15 0.17,0.02 0.33,0.02 C0.42,0.02 0.49,0.08 0.5,0.17 C0.51,0.08 0.58,0.02 0.67,0.02 C0.83,0.02 0.96,0.15 0.96,0.32 C0.96,0.62 0.5,0.96 0.5,0.96 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <Reveal className="flex flex-col items-center">
           {/* An explicit statement, by request — not the subtle non-flag
               nod this section used before. Owner confirmed this reversal
               knowingly, aware it also reverses the "no flags" line in the
-              original brief. */}
-          <div className="relative mb-9 h-32 w-32 overflow-hidden rounded-full ring-1 ring-paper/15 md:h-40 md:w-40">
+              original brief. Container is heart-shaped (clip-path), not a
+              circle, so the flag graphic's own silhouette isn't cropped away. */}
+          <div
+            className="relative mb-9 h-36 w-36 md:h-44 md:w-44"
+            style={{ clipPath: `url(#${HEART_CLIP_PATH_ID})` }}
+          >
             <Image
               src="/images/palestine-heart.jpg"
               alt="A heart in the colors of the Palestinian flag"
               fill
               className="object-cover"
-              sizes="160px"
+              sizes="176px"
             />
           </div>
 

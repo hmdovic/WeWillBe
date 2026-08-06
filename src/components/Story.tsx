@@ -13,17 +13,31 @@ export default function Story() {
   return (
     <section className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 md:px-10 md:items-center">
-        <Reveal className="relative aspect-[4/5] overflow-hidden order-2 md:order-1" y={0}>
-          <div ref={imgWrapRef} className="absolute inset-0">
-            <motion.div className="absolute inset-[-10%]" style={{ y: imgY }}>
-              <Image
-                src="/images/hoodie-lifestyle-03.jpg"
-                alt="A WEWILLBE Legend, back turned, in the LEGENDS hoodie"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </motion.div>
+        {/* A diptych, not one lonely image — both LEGENDS pieces get a
+            Legend, the hoodie shot large, the tee shot as an offset
+            second frame overlapping its corner. */}
+        <Reveal className="relative order-2 mb-10 md:order-1 md:mb-0" y={0}>
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <div ref={imgWrapRef} className="absolute inset-0">
+              <motion.div className="absolute inset-[-10%]" style={{ y: imgY }}>
+                <Image
+                  src="/images/hoodie-lifestyle-03.jpg"
+                  alt="A WEWILLBE Legend, back turned, in the LEGENDS hoodie"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </motion.div>
+            </div>
+          </div>
+          <div className="absolute -bottom-8 -right-6 h-32 w-24 overflow-hidden ring-4 ring-paper sm:h-44 sm:w-32 md:-right-10">
+            <Image
+              src="/images/tee-lifestyle-01.jpg"
+              alt="A WEWILLBE Legend, back turned, in the LEGENDS tee"
+              fill
+              className="object-cover"
+              sizes="140px"
+            />
           </div>
         </Reveal>
 
