@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 
 export default function Purpose() {
@@ -5,7 +6,20 @@ export default function Purpose() {
     <section className="relative overflow-hidden bg-ink py-24 md:py-32">
       <div className="grain" />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
-        <Reveal>
+        <Reveal className="flex flex-col items-center">
+          {/* A warm, human detail instead of any charity-logo or crisis
+              imagery — two hands held, cropped from the campaign shoot.
+              Real photo, not stock, not a symbol standing in for a place. */}
+          <div className="relative mb-9 h-32 w-32 overflow-hidden rounded-full ring-1 ring-paper/15 md:h-40 md:w-40">
+            <Image
+              src="/images/hands-held.jpg"
+              alt="Two hands held together"
+              fill
+              className="object-cover"
+              sizes="160px"
+            />
+          </div>
+
           {/* A quiet, non-flag nod — four low-saturation tones, a hairline
               rule, nothing that reads as iconography or a symbol on its own. */}
           <span
