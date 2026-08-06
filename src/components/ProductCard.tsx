@@ -63,34 +63,36 @@ export default function ProductCard({ product, index }: { product: Product; inde
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </motion.div>
-        <span className="absolute left-5 top-5 bg-ink px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-paper">
+        <span className="absolute left-3 top-3 bg-ink px-2 py-1 text-[0.55rem] font-bold uppercase tracking-[0.14em] text-paper sm:left-5 sm:top-5 sm:px-3 sm:py-1.5 sm:text-[0.62rem] sm:tracking-[0.16em]">
           {product.shortName === "Tee" ? "01" : "02"} — Limited
         </span>
       </div>
 
-      <div className="mt-7">
-        <h3 className="font-sans text-2xl font-black uppercase tracking-[-0.01em] text-paper md:text-3xl">
+      <div className="mt-4 sm:mt-7">
+        <h3 className="font-sans text-base font-black uppercase tracking-[-0.01em] text-paper sm:text-2xl md:text-3xl">
           {product.name}
         </h3>
-        <p className="mt-3 max-w-md text-sm leading-relaxed text-paper/60">{product.description}</p>
+        <p className="mt-2 hidden max-w-md text-sm leading-relaxed text-paper/60 sm:mt-3 sm:block">
+          {product.description}
+        </p>
 
-        <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[0.72rem] uppercase tracking-[0.06em] text-paper/45">
+        <ul className="mt-4 hidden flex-wrap gap-x-5 gap-y-1 text-[0.72rem] uppercase tracking-[0.06em] text-paper/45 sm:flex">
           {product.details.map((d) => (
             <li key={d}>{d}</li>
           ))}
         </ul>
 
-        <p className="mt-5 text-xl font-bold text-paper">{formatEUR(product.price)}</p>
+        <p className="mt-2 text-base font-bold text-paper sm:mt-5 sm:text-xl">{formatEUR(product.price)}</p>
 
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-paper/70">
+            <span className="text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-paper/70 sm:text-[0.68rem] sm:tracking-[0.14em]">
               Select Size
             </span>
             <button
               type="button"
               onClick={() => setShowSizeGuide((v) => !v)}
-              className="text-[0.68rem] text-paper/50 underline underline-offset-2 hover:text-paper/80"
+              className="hidden text-[0.68rem] text-paper/50 underline underline-offset-2 hover:text-paper/80 sm:inline"
             >
               Size Guide
             </button>
@@ -101,58 +103,62 @@ export default function ProductCard({ product, index }: { product: Product; inde
               extra-roomy fit, size up one.
             </p>
           )}
-          <div role="group" aria-label="Select size" className="grid grid-cols-6 gap-1.5">
+          {/* Flex-wrap with a real minimum width, not a fixed 6-column grid
+              — so on a narrow (2-up mobile) card the pills wrap to a second
+              row instead of shrinking until the pressed state is invisible. */}
+          <div role="group" aria-label="Select size" className="flex flex-wrap gap-1.5">
             {SIZES.map((s) => (
-              <button
+              <motion.button
                 key={s}
                 type="button"
                 aria-pressed={size === s}
+                whileTap={{ scale: 0.88 }}
                 onClick={() => {
                   setSize(s);
                   setSizeError(false);
                 }}
-                className={`border py-2.5 text-xs font-semibold transition-colors duration-200 ${
+                className={`min-w-[2.6rem] flex-1 border py-2 text-[0.7rem] font-semibold transition-all duration-150 sm:min-w-[3rem] sm:py-2.5 sm:text-xs ${
                   size === s
-                    ? "border-paper bg-paper text-ink"
-                    : "border-paper/25 text-paper/70 hover:border-paper/60"
+                    ? "border-accent bg-paper text-ink ring-1 ring-accent"
+                    : "border-paper/25 text-paper/70 hover:border-paper/60 active:border-paper active:bg-paper/10"
                 }`}
               >
                 {s}
-              </button>
+              </motion.button>
             ))}
           </div>
           {sizeError && <p className="mt-2 text-xs text-accent">Pick a size first.</p>}
         </div>
 
-        <div className="mt-6 flex items-center gap-4">
+        <div className="mt-4 flex items-center gap-2 sm:mt-6 sm:gap-4">
           <div className="flex items-center border border-paper/25">
             <button
               type="button"
               aria-label="Decrease quantity"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="h-12 w-11 text-lg text-paper/70 hover:text-paper"
+              className="h-10 w-9 text-base text-paper/70 hover:text-paper active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               &minus;
             </button>
-            <span className="w-8 text-center text-sm font-semibold text-paper">{qty}</span>
+            <span className="w-6 text-center text-xs font-semibold text-paper sm:w-8 sm:text-sm">{qty}</span>
             <button
               type="button"
               aria-label="Increase quantity"
               onClick={() => setQty((q) => Math.min(9, q + 1))}
-              className="h-12 w-11 text-lg text-paper/70 hover:text-paper"
+              className="h-10 w-9 text-base text-paper/70 hover:text-paper active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               +
             </button>
           </div>
           <MagneticButton
             onClick={handlePreorder}
-            className="flex-1 bg-paper px-6 py-3.5 text-center text-xs font-bold uppercase tracking-[0.14em] text-ink hover:bg-white"
+            className="flex-1 bg-paper px-3 py-3 text-center text-[0.65rem] font-bold uppercase tracking-[0.1em] text-ink hover:bg-white sm:px-6 sm:py-3.5 sm:text-xs sm:tracking-[0.14em]"
           >
             Pre-Order
           </MagneticButton>
         </div>
 
-        <p className="mt-5 text-[0.7rem] uppercase tracking-[0.08em] text-paper/40">
+        <p className="mt-3 hidden text-[0.7rem] uppercase tracking-[0.08em] text-paper/40 sm:mt-5 sm:block">
           Ships This Sunday · Limited First Collection · No Restocks
         </p>
       </div>

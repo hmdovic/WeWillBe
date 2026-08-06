@@ -17,7 +17,7 @@ export default function Products() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-14 md:mt-20 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
+        <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:mt-20 md:gap-x-10 lg:gap-x-16">
           {PRODUCTS.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}

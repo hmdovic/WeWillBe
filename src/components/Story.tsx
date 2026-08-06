@@ -1,18 +1,30 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "./Reveal";
 
 export default function Story() {
+  const imgWrapRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: imgWrapRef, offset: ["start end", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
   return (
     <section className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 md:px-10 md:items-center">
-        <Reveal className="relative aspect-[4/5] overflow-hidden order-2 md:order-1">
-          <Image
-            src="/images/hoodie-lifestyle-03.jpg"
-            alt="A WEWILLBE Legend, back turned, in the LEGENDS hoodie"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+        <Reveal className="relative aspect-[4/5] overflow-hidden order-2 md:order-1" y={0}>
+          <div ref={imgWrapRef} className="absolute inset-0">
+            <motion.div className="absolute inset-[-10%]" style={{ y: imgY }}>
+              <Image
+                src="/images/hoodie-lifestyle-03.jpg"
+                alt="A WEWILLBE Legend, back turned, in the LEGENDS hoodie"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </motion.div>
+          </div>
         </Reveal>
 
         <div className="order-1 md:order-2">
