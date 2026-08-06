@@ -32,7 +32,7 @@ export default function Purpose() {
               src="/images/palestine-heart.jpg"
               alt="A heart in the colors of the Palestinian flag"
               fill
-              className="object-cover"
+              className="object-cover scale-110"
               sizes="176px"
             />
           </div>

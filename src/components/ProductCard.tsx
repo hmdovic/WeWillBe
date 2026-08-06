@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { Product, Size } from "@/lib/constants";
 import { SIZES } from "@/lib/constants";
 import { usePreorder } from "./PreorderContext";
@@ -22,6 +22,28 @@ export default function ProductCard({ product, index }: { product: Product; inde
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [sizeError, setSizeError] = useState(false);
 
+  // A whisper of 3D tilt, desktop pointer only — the card leans slightly
+  // toward the cursor instead of sitting completely flat.
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springX = useSpring(tiltX, { stiffness: 250, damping: 25 });
+  const springY = useSpring(tiltY, { stiffness: 250, damping: 25 });
+  const rotateX = useTransform(springY, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-6, 6]);
+
+  function handleTiltMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    tiltX.set((e.clientX - rect.left) / rect.width - 0.5);
+    tiltY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+
+  function handleTiltLeave() {
+    tiltX.set(0);
+    tiltY.set(0);
+  }
+
   function handlePreorder() {
     if (!size) {
       setSizeError(true);
@@ -32,7 +54,12 @@ export default function ProductCard({ product, index }: { product: Product; inde
 
   return (
     <Reveal delay={index * 0.08} className="group">
-      <div className="relative aspect-[4/5] overflow-hidden bg-paper">
+      <motion.div
+        className="relative aspect-[4/5] overflow-hidden bg-paper"
+        style={{ rotateX, rotateY, transformPerspective: 800 }}
+        onMouseMove={handleTiltMove}
+        onMouseLeave={handleTiltLeave}
+      >
         {/* Lead with the back print — that's where the branding lives, and
             it's the more interesting shot. Front (plain) reveals on hover. */}
         <motion.div
@@ -66,7 +93,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
         <span className="absolute left-3 top-3 bg-ink px-2 py-1 text-[0.55rem] font-bold uppercase tracking-[0.14em] text-paper sm:left-5 sm:top-5 sm:px-3 sm:py-1.5 sm:text-[0.62rem] sm:tracking-[0.16em]">
           {product.shortName === "Tee" ? "01" : "02"} — Limited
         </span>
-      </div>
+      </motion.div>
 
       <div className="mt-4 sm:mt-7">
         <h3 className="font-sans text-base font-black uppercase tracking-[-0.01em] text-paper sm:text-2xl md:text-3xl">
