@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import Countdown from "@/components/Countdown";
 import Products from "@/components/Products";
 import SocialProof from "@/components/SocialProof";
@@ -26,6 +27,7 @@ export default function Home() {
         </a>
         <main>
           <Hero />
+          <Marquee />
           <Countdown />
           <Products />
           <SocialProof />

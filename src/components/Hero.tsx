@@ -29,7 +29,13 @@ function HeadlineLetters({ sizeClass }: { sizeClass: string }) {
   );
 }
 
-function PreorderCTAs({ align = "center" }: { align?: "center" | "start" }) {
+function PreorderCTAs({
+  align = "center",
+  showMicrocopy = true,
+}: {
+  align?: "center" | "start";
+  showMicrocopy?: boolean;
+}) {
   const { open } = usePreorder();
   const isStart = align === "start";
 
@@ -65,14 +71,19 @@ function PreorderCTAs({ align = "center" }: { align?: "center" | "start" }) {
         </MagneticButton>
       </motion.div>
 
-      <motion.p
-        className={`mt-5 text-[0.68rem] uppercase tracking-[0.12em] text-paper/55 ${isStart ? "text-left" : "text-center"}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.9, delay: 1.35, ease: EASE_LUXURY }}
-      >
-        Pre-Orders Close Saturday · Ships This Sunday
-      </motion.p>
+      {/* Dropped on mobile — the countdown right after this section already
+          says "ends Saturday, ships Sunday" much louder. No need to say it
+          twice before the visitor has even scrolled once. */}
+      {showMicrocopy && (
+        <motion.p
+          className={`mt-5 text-[0.68rem] uppercase tracking-[0.12em] text-paper/55 ${isStart ? "text-left" : "text-center"}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 1.35, ease: EASE_LUXURY }}
+        >
+          Pre-Orders Close Saturday · Ships This Sunday
+        </motion.p>
+      )}
     </>
   );
 }
@@ -173,7 +184,7 @@ export default function Hero() {
             Not everyone will own one.
           </motion.p>
 
-          <PreorderCTAs align="center" />
+          <PreorderCTAs align="center" showMicrocopy={false} />
         </div>
 
         <ScrollIndicator />

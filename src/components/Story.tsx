@@ -13,10 +13,11 @@ export default function Story() {
   return (
     <section className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 md:px-10 md:items-center">
-        {/* A diptych, not one lonely image — both LEGENDS pieces get a
-            Legend, the hoodie shot large, the tee shot as an offset
-            second frame overlapping its corner. */}
-        <Reveal className="relative order-2 mb-10 md:order-1 md:mb-0" y={0}>
+        {/* Image first, always — including on mobile. This used to stack
+            text (five separate blocks of it) above the photo, so a
+            visitor scrolled through a wall of copy before seeing a single
+            picture. An editorial page leads with the image. */}
+        <Reveal className="relative order-1 mb-10 md:mb-0" y={0}>
           <div className="relative aspect-[4/5] overflow-hidden">
             <div ref={imgWrapRef} className="absolute inset-0">
               <motion.div className="absolute inset-[-10%]" style={{ y: imgY }}>
@@ -41,7 +42,7 @@ export default function Story() {
           </div>
         </Reveal>
 
-        <div className="order-1 md:order-2">
+        <div className="order-2">
           <Reveal>
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
               The Story
