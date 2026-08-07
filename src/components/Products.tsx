@@ -11,13 +11,13 @@ export default function Products() {
             The Drop
           </span>
           <h2 className="mt-4 font-sans text-4xl font-black uppercase leading-[0.95] tracking-[-0.01em] text-paper md:text-6xl">
-            Two pieces.
+            Three pieces.
             <br />
             No filler.
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:mt-20 md:gap-x-10 lg:gap-x-16">
+        <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:mt-20 md:gap-x-10 lg:grid-cols-3 lg:gap-x-12">
           {PRODUCTS.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}

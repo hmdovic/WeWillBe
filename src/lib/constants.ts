@@ -6,9 +6,10 @@
  */
 
 // Pre-order window closes here, orders ship the day after.
-// CONFIRM: exact time — currently Saturday at noon, matching every other
-// countdown this project has used.
-export const PREORDER_DEADLINE = "2026-08-08T12:00:00";
+// Pushed a week out (from Aug 8 to Aug 15) — owner asked for more time
+// before the original deadline hit. Still Saturday noon, still ships the
+// day after, same pattern as before.
+export const PREORDER_DEADLINE = "2026-08-15T12:00:00";
 export const SHIP_DAY_LABEL = "This Sunday";
 
 export const BRAND = {
@@ -66,6 +67,18 @@ export const PRODUCTS: Product[] = [
       "/images/hoodie-lifestyle-02.jpg",
       "/images/hoodie-lifestyle-03.jpg",
     ],
+  },
+  {
+    id: "legends-tracksuit",
+    name: "LEGENDS TRACKSUIT",
+    shortName: "Tracksuit",
+    description:
+      "Zip-up hoodie and matching sweatpants, heavyweight cotton fleece. Small wewillbe embroidery on the chest, LEGENDS across the back.",
+    details: ["Matching Zip Hoodie + Sweatpants", "Premium Heavyweight Cotton Fleece", "Embroidered chest + back graphic"],
+    price: 199.95,
+    frontImage: "/images/tracksuit-01-front.jpg",
+    backImage: "/images/tracksuit-01-back.jpg",
+    lifestyleImages: ["/images/tracksuit-01-front.jpg", "/images/tracksuit-01-back.jpg"],
   },
 ];
 

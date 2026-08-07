@@ -91,7 +91,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
           />
         </motion.div>
         <span className="absolute left-3 top-3 bg-ink px-2 py-1 text-[0.55rem] font-bold uppercase tracking-[0.14em] text-paper sm:left-5 sm:top-5 sm:px-3 sm:py-1.5 sm:text-[0.62rem] sm:tracking-[0.16em]">
-          {product.shortName === "Tee" ? "01" : "02"} — Limited
+          {String(index + 1).padStart(2, "0")} — Limited
         </span>
       </motion.div>
 
