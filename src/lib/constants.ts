@@ -17,8 +17,8 @@ export const BRAND = {
   collection: "FIRST COLLECTION",
   drop: "LEGENDS",
   contactEmail: "vormiq@outlook.com",
-  instagramUrl: "https://instagram.com",
-  tiktokUrl: "https://tiktok.com",
+  instagramUrl: "https://www.instagram.com/wewillbe.store",
+  tiktokUrl: "https://www.tiktok.com/@wewillbe.store",
 };
 
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL";

@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { BRAND } from "@/lib/constants";
 import { usePreorder } from "./PreorderContext";
 import MagneticButton from "./MagneticButton";
+import SocialLinks from "./SocialLinks";
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const HEADLINE_LETTERS = BRAND.name.split("");
@@ -162,6 +163,7 @@ export default function Hero() {
         <span className="absolute left-6 top-6 z-10 font-sans text-sm font-extrabold tracking-[0.08em] text-paper">
           {BRAND.name}
         </span>
+        <SocialLinks className="absolute right-6 top-6 z-10" />
 
         <div className="relative z-10 flex flex-col items-center px-6 text-center max-w-4xl">
           <motion.span
@@ -194,14 +196,17 @@ export default function Hero() {
       <div className="hidden md:flex md:min-h-screen w-full">
         {/* Copy panel — plain ink background, own column, never fights the photo for legibility */}
         <motion.div
-          className="relative z-10 flex w-[44%] flex-col justify-between bg-ink px-14 py-12 lg:px-20 lg:py-16"
+          className="relative z-10 flex w-[44%] flex-col bg-ink px-14 py-12 lg:px-20 lg:py-16"
           style={{ opacity: contentOpacity, y: contentY }}
         >
-          <span className="font-sans text-sm font-extrabold tracking-[0.08em] text-paper">
-            {BRAND.name}
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-sm font-extrabold tracking-[0.08em] text-paper">
+              {BRAND.name}
+            </span>
+            <SocialLinks />
+          </div>
 
-          <div className="max-w-lg">
+          <div className="max-w-lg flex-1 flex flex-col justify-center">
             <motion.span
               className="mb-5 block text-xs font-semibold uppercase tracking-[0.28em] text-paper/70"
               initial={{ opacity: 0 }}
@@ -224,10 +229,6 @@ export default function Hero() {
 
             <PreorderCTAs align="start" />
           </div>
-
-          <span className="text-[0.62rem] uppercase tracking-[0.24em] text-paper/40">
-            Scroll to explore
-          </span>
         </motion.div>
 
         {/* Photo panel — the campaign still shown close to its own aspect
@@ -282,9 +283,6 @@ function ScrollIndicator() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 1.6, ease: EASE_LUXURY }}
     >
-      <span className="text-[0.62rem] uppercase tracking-[0.24em] text-paper/60 [writing-mode:vertical-rl]">
-        Scroll
-      </span>
       <span className="relative h-9 w-px overflow-hidden bg-paper/25">
         <motion.span
           className="absolute left-0 top-0 h-full w-full bg-paper"
