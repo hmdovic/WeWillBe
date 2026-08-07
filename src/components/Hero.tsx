@@ -9,23 +9,27 @@ import MagneticButton from "./MagneticButton";
 import SocialLinks from "./SocialLinks";
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const HEADLINE_LETTERS = BRAND.name.split("");
 
-function HeadlineLetters({ sizeClass }: { sizeClass: string }) {
+/** The uploaded wordmark, not a re-typeset headline — the brief is
+ * explicit: the logo is the hero, never redrawn, never replaced with a
+ * font. A masked wipe-reveal stands in for the old per-letter stagger. */
+function HeroLogo({ widthClass }: { widthClass: string }) {
   return (
-    <h1 className="flex" aria-label={BRAND.name}>
-      {HEADLINE_LETTERS.map((letter, i) => (
-        <span key={i} className="inline-block overflow-hidden" aria-hidden="true">
-          <motion.span
-            className={`font-headline block font-extrabold uppercase leading-[0.9] tracking-[-0.01em] text-paper ${sizeClass}`}
-            initial={{ y: "115%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 0.9, delay: 0.5 + i * 0.045, ease: EASE_LUXURY }}
-          >
-            {letter}
-          </motion.span>
-        </span>
-      ))}
+    <h1 className={`overflow-hidden ${widthClass}`} aria-label={BRAND.name}>
+      <motion.div
+        initial={{ y: "115%" }}
+        animate={{ y: "0%" }}
+        transition={{ duration: 0.9, delay: 0.5, ease: EASE_LUXURY }}
+      >
+        <Image
+          src="/logo/wewillbe-wordmark.png"
+          alt={BRAND.name}
+          width={967}
+          height={201}
+          className="h-auto w-full brightness-0 invert"
+          priority
+        />
+      </motion.div>
     </h1>
   );
 }
@@ -160,8 +164,8 @@ export default function Hero() {
         />
         <div className="grain -z-10" />
 
-        <span className="absolute left-6 top-6 z-10 font-sans text-sm font-extrabold tracking-[0.08em] text-paper">
-          {BRAND.name}
+        <span className="absolute left-6 top-6 z-10">
+          <Image src="/logo/wewillbe-wordmark.png" alt={BRAND.name} width={130} height={27} className="h-[18px] w-auto brightness-0 invert" priority />
         </span>
         <SocialLinks className="absolute right-6 top-6 z-10" />
 
@@ -175,7 +179,7 @@ export default function Hero() {
             {BRAND.collection}
           </motion.span>
 
-          <HeadlineLetters sizeClass="text-[2.5rem]" />
+          <HeroLogo widthClass="w-[16rem] max-w-[80vw]" />
 
           <motion.p
             className="mt-5 max-w-md font-serif italic text-base text-paper/85"
@@ -200,9 +204,7 @@ export default function Hero() {
           style={{ opacity: contentOpacity, y: contentY }}
         >
           <div className="flex items-center justify-between">
-            <span className="font-sans text-sm font-extrabold tracking-[0.08em] text-paper">
-              {BRAND.name}
-            </span>
+            <Image src="/logo/wewillbe-wordmark.png" alt={BRAND.name} width={130} height={27} className="h-5 w-auto brightness-0 invert" priority />
             <SocialLinks />
           </div>
 
@@ -216,7 +218,7 @@ export default function Hero() {
               {BRAND.collection}
             </motion.span>
 
-            <HeadlineLetters sizeClass="text-[3.4rem] lg:text-[4.4rem]" />
+            <HeroLogo widthClass="w-[22rem] lg:w-[28rem] max-w-full" />
 
             <motion.p
               className="mt-5 max-w-md font-serif italic text-lg text-paper/85"
