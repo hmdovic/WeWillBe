@@ -20,14 +20,19 @@ function TikTokIcon() {
 }
 
 export default function SocialLinks({ className = "" }: { className?: string }) {
+  // The icons stay small (18px) — the tap target doesn't. Each link is a
+  // real 44px box with the icon centered inside, so the hit area meets
+  // the 44x44 minimum without inflating how big the icons look; gap-2
+  // between the two boxes keeps 8px of real separation between them.
+  const tapArea = "flex h-11 w-11 items-center justify-center transition-colors hover:text-paper";
   return (
-    <div className={`flex items-center gap-4 text-paper/70 ${className}`}>
+    <div className={`flex items-center gap-2 text-paper/70 ${className}`}>
       <a
         href={BRAND.instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WEWILLBE on Instagram"
-        className="transition-colors hover:text-paper"
+        className={tapArea}
       >
         <InstagramIcon />
       </a>
@@ -36,7 +41,7 @@ export default function SocialLinks({ className = "" }: { className?: string }) 
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WEWILLBE on TikTok"
-        className="transition-colors hover:text-paper"
+        className={tapArea}
       >
         <TikTokIcon />
       </a>

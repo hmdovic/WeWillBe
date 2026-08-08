@@ -163,7 +163,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
               type="button"
               aria-label="Decrease quantity"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="h-10 w-9 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
+              className="h-11 w-11 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               &minus;
             </button>
@@ -172,7 +172,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
               type="button"
               aria-label="Increase quantity"
               onClick={() => setQty((q) => Math.min(9, q + 1))}
-              className="h-10 w-9 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
+              className="h-11 w-11 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               +
             </button>

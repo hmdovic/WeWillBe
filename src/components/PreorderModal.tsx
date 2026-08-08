@@ -175,7 +175,7 @@ export default function PreorderModal() {
               type="button"
               onClick={close}
               aria-label="Close"
-              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center text-2xl text-paper/60 hover:text-paper md:right-10 md:top-8"
+              className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center text-2xl text-paper/60 hover:text-paper md:right-10 md:top-8"
             >
               &times;
             </button>
