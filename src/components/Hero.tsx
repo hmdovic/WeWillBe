@@ -164,9 +164,13 @@ export default function Hero() {
         />
         <div className="grain -z-10" />
 
-        <span className="absolute left-6 top-6 z-10">
-          <Image src="/logo/wewillbe-wordmark.png" alt={BRAND.name} width={130} height={27} className="h-[18px] w-auto brightness-0 invert" priority />
-        </span>
+        <button
+          type="button"
+          onClick={() => document.getElementById("collection")?.scrollIntoView({ behavior: "smooth" })}
+          className="absolute left-6 top-6 z-10 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-paper/80 hover:text-paper"
+        >
+          Shop
+        </button>
         <SocialLinks className="absolute right-6 top-6 z-10" />
 
         <div className="relative z-10 flex flex-col items-center px-6 text-center max-w-4xl">
@@ -204,7 +208,13 @@ export default function Hero() {
           style={{ opacity: contentOpacity, y: contentY }}
         >
           <div className="flex items-center justify-between">
-            <Image src="/logo/wewillbe-wordmark.png" alt={BRAND.name} width={130} height={27} className="h-5 w-auto brightness-0 invert" priority />
+            <button
+              type="button"
+              onClick={() => document.getElementById("collection")?.scrollIntoView({ behavior: "smooth" })}
+              className="text-xs font-semibold uppercase tracking-[0.24em] text-paper/80 hover:text-paper"
+            >
+              Shop
+            </button>
             <SocialLinks />
           </div>
 

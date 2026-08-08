@@ -11,7 +11,7 @@ export default function Story() {
   const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <section className="relative bg-paper py-24 md:py-32">
+    <section id="story" className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 md:px-10 md:items-center">
         {/* Image first, always — including on mobile. This used to stack
             text (five separate blocks of it) above the photo, so a

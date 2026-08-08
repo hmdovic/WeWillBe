@@ -8,7 +8,7 @@ const HEART_CLIP_PATH_ID = "purpose-heart-clip";
 
 export default function Purpose() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 md:py-32">
+    <section id="purpose" className="relative overflow-hidden bg-ink py-24 md:py-32">
       <div className="grain" />
       <svg width="0" height="0" className="absolute" aria-hidden="true">
         <defs>
