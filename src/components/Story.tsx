@@ -31,7 +31,11 @@ export default function Story() {
               </motion.div>
             </div>
           </div>
-          <div className="absolute -bottom-6 -right-4 h-36 w-28 overflow-hidden shadow-[0_12px_30px_-8px_rgba(0,0,0,0.5)] ring-4 ring-paper sm:h-48 sm:w-36 md:-bottom-8 md:-right-10">
+          <motion.div
+            className="absolute -bottom-6 -right-4 h-36 w-28 overflow-hidden shadow-[0_12px_30px_-8px_rgba(0,0,0,0.5)] ring-4 ring-paper sm:h-48 sm:w-36 md:-bottom-8 md:-right-10"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          >
             <Image
               src="/images/tee-lifestyle-01.jpg"
               alt="A WEWILLBE Legend, back turned, in the LEGENDS tee"
@@ -39,7 +43,7 @@ export default function Story() {
               className="object-cover"
               sizes="160px"
             />
-          </div>
+          </motion.div>
         </Reveal>
 
         <div className="order-2">
@@ -58,11 +62,27 @@ export default function Story() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-10 space-y-2 text-sm uppercase tracking-[0.06em] text-ink/60">
-            <p>This collection is the beginning.</p>
-            <p>No restocks.</p>
-            <p>No mass production.</p>
-            <p>Only the people who believed first will own the First Collection.</p>
+          {/* A run of facts, not more prose — visually distinct from the
+              italic statements around it (small sand-accented markers,
+              tighter line spacing) so it reads as a quick list instead
+              of a fifth paragraph in the same voice as the other four. */}
+          <Reveal delay={0.15} className="mt-10 space-y-2.5 text-sm uppercase tracking-[0.06em] text-ink/60">
+            <p className="flex items-baseline gap-3">
+              <span className="h-[3px] w-[3px] flex-shrink-0 rounded-full bg-sand" aria-hidden="true" />
+              This collection is the beginning.
+            </p>
+            <p className="flex items-baseline gap-3">
+              <span className="h-[3px] w-[3px] flex-shrink-0 rounded-full bg-sand" aria-hidden="true" />
+              No restocks.
+            </p>
+            <p className="flex items-baseline gap-3">
+              <span className="h-[3px] w-[3px] flex-shrink-0 rounded-full bg-sand" aria-hidden="true" />
+              No mass production.
+            </p>
+            <p className="flex items-baseline gap-3">
+              <span className="h-[3px] w-[3px] flex-shrink-0 rounded-full bg-sand" aria-hidden="true" />
+              Only the people who believed first will own the First Collection.
+            </p>
           </Reveal>
 
           <Reveal delay={0.25} className="mt-10">
