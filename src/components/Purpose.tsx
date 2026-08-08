@@ -70,7 +70,7 @@ export default function Purpose() {
         </Reveal>
 
         <Reveal delay={0.3} className="mt-12">
-          <p className="mx-auto max-w-xl text-xs leading-relaxed text-paper/35">
+          <p className="mx-auto max-w-xl text-xs leading-relaxed text-paper/55">
             The statement above is WEWILLBE&rsquo;s own. The donation is WEWILLBE&rsquo;s own
             commitment, made to Save the Children directly — it does not imply an official
             partnership with Save the Children unless and until one is confirmed. We&rsquo;ll

@@ -103,7 +103,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
           {product.description}
         </p>
 
-        <ul className="mt-4 hidden flex-wrap gap-x-5 gap-y-1 text-[0.72rem] uppercase tracking-[0.06em] text-paper/45 sm:flex">
+        <ul className="mt-4 hidden flex-wrap gap-x-5 gap-y-1 text-[0.72rem] uppercase tracking-[0.06em] text-paper/55 sm:flex">
           {product.details.map((d) => (
             <li key={d}>{d}</li>
           ))}
@@ -144,7 +144,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
                   setSize(s);
                   setSizeError(false);
                 }}
-                className={`min-w-[2.6rem] flex-1 border py-2 text-[0.7rem] font-semibold transition-all duration-150 sm:min-w-[3rem] sm:py-2.5 sm:text-xs ${
+                className={`min-w-[2.6rem] flex-1 border py-2 text-[0.7rem] font-semibold transition-[border-color,background-color,color,box-shadow] duration-150 sm:min-w-[3rem] sm:py-2.5 sm:text-xs ${
                   size === s
                     ? "border-accent bg-paper text-ink ring-1 ring-accent"
                     : "border-paper/25 text-paper/70 hover:border-paper/60 active:border-paper active:bg-paper/10"
@@ -163,7 +163,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
               type="button"
               aria-label="Decrease quantity"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="h-10 w-9 text-base text-paper/70 hover:text-paper active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
+              className="h-10 w-9 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               &minus;
             </button>
@@ -172,7 +172,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
               type="button"
               aria-label="Increase quantity"
               onClick={() => setQty((q) => Math.min(9, q + 1))}
-              className="h-10 w-9 text-base text-paper/70 hover:text-paper active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
+              className="h-10 w-9 text-base text-paper/70 transition-[transform,color,background-color] duration-150 ease-out hover:text-paper active:scale-90 active:bg-paper/10 sm:h-12 sm:w-11 sm:text-lg"
             >
               +
             </button>
@@ -185,7 +185,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
           </MagneticButton>
         </div>
 
-        <p className="mt-3 hidden text-[0.7rem] uppercase tracking-[0.08em] text-paper/40 sm:mt-5 sm:block">
+        <p className="mt-3 hidden text-[0.7rem] uppercase tracking-[0.08em] text-paper/55 sm:mt-5 sm:block">
           Ships This Sunday · Limited First Collection · No Restocks
         </p>
       </div>

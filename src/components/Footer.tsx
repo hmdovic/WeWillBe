@@ -25,7 +25,7 @@ export default function Footer() {
             Email
           </a>
         </nav>
-        <p className="text-[0.7rem] text-paper/35">
+        <p className="text-[0.7rem] text-paper/55">
           &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
         </p>
       </div>

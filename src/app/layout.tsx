@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "WEWILLBE — First Collection · LEGENDS",
   description:
-    "WE DON'T FOLLOW. WE BECOME. Pre-order the WEWILLBE First Collection — LEGENDS Tee and LEGENDS Hoodie. Limited. No restocks. Ships this Sunday.",
+    "WE DON'T FOLLOW. WE BECOME. Pre-order the WEWILLBE First Collection — LEGENDS Tee, Hoodie and Tracksuit. Limited. No restocks. Ships this Sunday.",
   openGraph: {
     type: "website",
     siteName: "WEWILLBE",
     title: "WEWILLBE — First Collection · LEGENDS",
     description:
-      "WE DON'T FOLLOW. WE BECOME. Pre-order the First Collection — limited, no restocks, ships this Sunday.",
+      "WE DON'T FOLLOW. WE BECOME. Pre-order the First Collection — Tee, Hoodie and Tracksuit. Limited, no restocks, ships this Sunday.",
     url: siteUrl,
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WEWILLBE — First Collection · LEGENDS",
     description:
-      "WE DON'T FOLLOW. WE BECOME. Pre-order the First Collection — limited, no restocks, ships this Sunday.",
+      "WE DON'T FOLLOW. WE BECOME. Pre-order the First Collection — Tee, Hoodie and Tracksuit. Limited, no restocks, ships this Sunday.",
     images: ["/og-image.jpg"],
   },
   icons: {
