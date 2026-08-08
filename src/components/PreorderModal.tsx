@@ -25,11 +25,6 @@ interface FormState {
   lastName: string;
   email: string;
   phone: string;
-  street: string;
-  houseNumber: string;
-  postalCode: string;
-  city: string;
-  country: string;
   productId: string;
   size: Size | "";
   quantity: number;
@@ -37,17 +32,18 @@ interface FormState {
   understands: boolean;
 }
 
+// Deliberately not collecting a shipping address here. This is a
+// pre-order, not a checkout — the copy already promises a follow-up
+// for payment before it ships, so that's the natural moment to ask for
+// an address too. Asking for 5 extra address fields before anyone has
+// committed to paying is exactly the kind of friction that costs
+// completions at the one step that actually matters.
 function emptyForm(product: Product | null, size: Size | null, quantity: number): FormState {
   return {
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    street: "",
-    houseNumber: "",
-    postalCode: "",
-    city: "",
-    country: "",
     productId: product?.id ?? PRODUCTS[0].id,
     size: size ?? "",
     quantity: quantity || 1,
@@ -63,7 +59,6 @@ function buildMailtoBody(form: FormState, productName: string) {
     `Name: ${form.firstName} ${form.lastName}`,
     `Email: ${form.email}`,
     `Phone: ${form.phone}`,
-    `Address: ${form.street} ${form.houseNumber}, ${form.postalCode} ${form.city}, ${form.country}`,
     "",
     `Product: ${productName}`,
     `Size: ${form.size}`,
@@ -119,11 +114,6 @@ export default function PreorderModal() {
             last_name: form.lastName,
             email: form.email,
             phone: form.phone,
-            street: form.street,
-            house_number: form.houseNumber,
-            postal_code: form.postalCode,
-            city: form.city,
-            country: form.country,
             product: selectedProduct.name,
             size: form.size,
             quantity: form.quantity,
@@ -191,8 +181,8 @@ export default function PreorderModal() {
                   Reserve Yours
                 </h2>
                 <p className="mt-3 max-w-lg text-sm text-paper/50">
-                  This is a pre-order. You won&rsquo;t be charged now — we&rsquo;ll follow up with
-                  payment details before it ships this Sunday.
+                  This is a pre-order. You won&rsquo;t be charged now — we&rsquo;ll follow up by
+                  email with payment and shipping details before it ships this Sunday.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-10 space-y-8">
@@ -237,53 +227,9 @@ export default function PreorderModal() {
                     </Field>
                   </fieldset>
 
-                  <fieldset className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <Field label="Street" required>
-                      <input
-                        required
-                        value={form.street}
-                        onChange={(e) => update("street", e.target.value)}
-                        className={inputClass}
-                        autoComplete="address-line1"
-                      />
-                    </Field>
-                    <Field label="House Number" required>
-                      <input
-                        required
-                        value={form.houseNumber}
-                        onChange={(e) => update("houseNumber", e.target.value)}
-                        className={inputClass}
-                      />
-                    </Field>
-                    <Field label="Postal Code" required>
-                      <input
-                        required
-                        value={form.postalCode}
-                        onChange={(e) => update("postalCode", e.target.value)}
-                        className={inputClass}
-                        autoComplete="postal-code"
-                      />
-                    </Field>
-                    <Field label="City" required>
-                      <input
-                        required
-                        value={form.city}
-                        onChange={(e) => update("city", e.target.value)}
-                        className={inputClass}
-                        autoComplete="address-level2"
-                      />
-                    </Field>
-                    <Field label="Country" required className="md:col-span-2">
-                      <input
-                        required
-                        value={form.country}
-                        onChange={(e) => update("country", e.target.value)}
-                        className={inputClass}
-                        autoComplete="country-name"
-                      />
-                    </Field>
-                  </fieldset>
-
+                  {/* No address fields here on purpose — see the comment
+                      on emptyForm(). Kept for the payment follow-up, not
+                      this step. */}
                   <fieldset className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     <Field label="Product" required>
                       <select

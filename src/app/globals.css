@@ -35,45 +35,56 @@
   --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-* {
-  box-sizing: border-box;
-}
+/* Base element resets belong in Tailwind's own "base" layer — CSS
+   cascade layers give ANY unlayered rule priority over layered ones
+   regardless of specificity, so a plain `button { background: none }`
+   here would silently beat every `bg-*` utility ever applied to a
+   button (which is exactly what was happening: every button using
+   bg-paper/border-accent/etc. was rendering with no fill or border at
+   all, invisibly, because this block sat outside any layer). Wrapping
+   it in @layer base restores the normal, expected cascade — utilities
+   still win. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: auto;
-}
+  html {
+    scroll-behavior: auto;
+  }
 
-body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-img,
-video {
-  max-width: 100%;
-  display: block;
-}
+  img,
+  video {
+    max-width: 100%;
+    display: block;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
 
-::selection {
-  background: var(--accent);
-  color: var(--paper);
+  ::selection {
+    background: var(--accent);
+    color: var(--paper);
+  }
 }
 
 /* Subtle film grain, reused across dark sections for texture without a
