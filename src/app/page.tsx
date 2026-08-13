@@ -2,6 +2,7 @@ import PromoBar from "@/components/PromoBar";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Countdown from "@/components/Countdown";
+import CampaignReveal from "@/components/CampaignReveal";
 import Products from "@/components/Products";
 import SocialProof from "@/components/SocialProof";
 import Story from "@/components/Story";
@@ -35,6 +36,7 @@ export default function Home() {
           <Hero />
           <Marquee />
           <Countdown />
+          <CampaignReveal />
           <Products />
           <SocialProof />
           <Story />
