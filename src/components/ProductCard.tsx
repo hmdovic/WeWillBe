@@ -82,13 +82,31 @@ export default function ProductCard({ product, index }: { product: Product; inde
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: EASE_LUXURY }}
         >
-          <Image
-            src={product.frontImage}
-            alt={`${product.name} — front`}
-            fill
-            className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+          {product.video ? (
+            // Real footage of this exact piece, not another static shot —
+            // loops on hover instead of just sitting there like the tee/hoodie.
+            <video
+              className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              aria-label={`${product.name} — front, in motion`}
+              poster={product.videoPoster}
+              muted
+              loop
+              playsInline
+              preload="none"
+              onMouseEnter={(e) => e.currentTarget.play()}
+              onMouseLeave={(e) => e.currentTarget.pause()}
+            >
+              <source src={product.video} type="video/mp4" />
+            </video>
+          ) : (
+            <Image
+              src={product.frontImage}
+              alt={`${product.name} — front`}
+              fill
+              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          )}
         </motion.div>
         <span className="absolute left-3 top-3 bg-ink px-2 py-1 text-[0.55rem] font-bold uppercase tracking-[0.14em] text-paper sm:left-5 sm:top-5 sm:px-3 sm:py-1.5 sm:text-[0.62rem] sm:tracking-[0.16em]">
           {String(index + 1).padStart(2, "0")} — Limited

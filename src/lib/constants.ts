@@ -35,6 +35,10 @@ export interface Product {
   frontImage: string;
   backImage: string;
   lifestyleImages: string[];
+  // Optional: real footage of the actual product (not stock/lifestyle
+  // filler) shown in place of the static front image on hover/tap.
+  video?: string;
+  videoPoster?: string;
 }
 
 export const PRODUCTS: Product[] = [
@@ -79,6 +83,8 @@ export const PRODUCTS: Product[] = [
     frontImage: "/images/tracksuit-01-front.jpg",
     backImage: "/images/tracksuit-01-back.jpg",
     lifestyleImages: ["/images/tracksuit-01-front.jpg", "/images/tracksuit-01-back.jpg"],
+    video: "/video/tracksuit-product.mp4",
+    videoPoster: "/images/tracksuit-product-poster.jpg",
   },
 ];
 
