@@ -36,13 +36,19 @@ export default function Story() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
           >
-            <Image
-              src="/images/tee-lifestyle-01.jpg"
-              alt="A WEWILLBE Legend, back turned, in the LEGENDS tee"
-              fill
-              className="object-cover"
-              sizes="160px"
-            />
+            {/* Same campaign, same street, actually moving — the couple
+                who "keep moving forward" (the line right next to this)
+                literally walking, instead of a third still photo. */}
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/images/story-street-poster.jpg"
+            >
+              <source src="/video/story-street.mp4" type="video/mp4" />
+            </video>
           </motion.div>
         </Reveal>
 
